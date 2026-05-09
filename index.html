@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="dark light">
+<title>PL LOCATION – Louez l'Excellence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===== MODAL OVERLAY ===== */
+.ov {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,.4);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+}
+
+.ov.open {
+  display: flex;
+}
+
+/* ===== MODAL BOX ===== */
+.modal {
+  background: #ffffff;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 600px;
+  padding: 28px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+}
+
+/* ===== HEADER ===== */
+.mh h2 {
+  color: #111827;
+}
+
+.mcl {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+/* ===== STEP ===== */
+.sd {
+  background: #e5e7eb;
+  color: #6b7280;
+}
+
+.sd.act {
+  background: #3b82f6;
+  color: white;
+}
+
+/* ===== TITRES ===== */
+.sh2 {
+  color: #111827;
+}
+
+.sh2s {
+  color: #6b7280;
+}
+
+/* ===== LISTE VEHICULE ===== */
+.vi {
+  background: #ffffff;
+  border: 1.5px solid #e5e7eb;
+}
+
+.vi:hover {
+  border-color: #3b82f6;
+  background: #f9fafb;
+}
+
+.vi.sel {
+  background: #eff6ff;
+  border-color: #3b82f6;
+}
+
+.vii h4 {
+  color: #111827;
+}
+
+.vii span {
+  color: #6b7280;
+}
+
+/* ===== INPUT ===== */
+.mfg input,
+.mfg textarea {
+  background: #ffffff;
+  color: #111827;
+  border: 1.5px solid #e5e7eb;
+}
+
+/* ===== BLOCS ===== */
+.psb,
+.psumm,
+.scm,
+.du,
+.pib {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+/* ===== BOUTONS ===== */
+.btn-bk {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.btn-nx {
+  background: #3b82f6;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<div id="cur" aria-hidden="true"></div>
+<div id="cur-ring" aria-hidden="true"></div>
+<div id="prog" aria-hidden="true"></div>
+
+<!-- ========== NAV ========== -->
+<nav id="nav">
+  <a href="#" class="logo" aria-label="Accueil PL LOCATION">
+    <img src="images/plloca.png" style="height:50px" alt="Logo PL LOCATION" loading="eager" decoding="async">
+    <span>PL LOCATION</span>
+  </a>
+  <ul>
+    <li><a href="#veh">Nos véhicules</a></li>
+    <li><a href="#how">Comment ça marche</a></li>
+    <li><a href="#rev">Avis clients</a></li>
+    <li><a href="#cnt">Contact</a></li>
+  </ul>
+  <button class="btn-nav" type="button" onclick="openRes()">Réserver maintenant</button>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <div class="hbg" aria-hidden="true"></div>
+  <div class="hgrad" aria-hidden="true"></div>
+  <div class="hpart" id="hpart" aria-hidden="true"></div>
+  <div class="hc">
+    <div class="badge"><span class="bdot"></span>Disponible maintenant</div>
+    <h1>Louez l'Excellence,<br><span>Conduisez la Liberté</span></h1>
+    <p>Une expérience de location transparente, sécurisée et sans tracas. Réservez votre véhicule idéal en moins de 2 minutes.</p>
+    <div class="hbtns">
+      <button class="btnp primary" type="button" onclick="openRes()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Réserver maintenant
+      </button>
+      <button class="btnp secondary" type="button" onclick="document.getElementById('veh').scrollIntoView({behavior:'smooth'})">Voir nos véhicules</button>
+    </div>
+    <div class="htags">
+      <div class="htag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Traitement protégé</div>
+      <div class="htag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Réservation 24/7</div>
+      <div class="htag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Sans Caution</div>
+      <div class="htag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>Service Premium</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SANS CAUTION ========== -->
+<div id="nodep">
+  <div class="ndg">
+    <div class="rvl">
+      <div class="sl" style="color:#60a5fa">Notre engagement</div>
+      <h2 class="st" style="color:#fff">Location <em>sans caution</em>,<br>en toute sérénité</h2>
+      <p style="color:rgba(255,255,255,.58);line-height:1.76;font-size:.93rem;margin-bottom:26px">Fini les immobilisations de fonds. Grâce à notre assurance tous risques premium, vous roulez l'esprit tranquille sans avancer le moindre dépôt de garantie.</p>
+      <div class="nd-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Couverture tous risques incluse</div>
+    </div>
+    <div class="ndc rvr">
+      <div class="ndi"><div class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>Assurance tous risques</h4><p>Chaque véhicule est couvert intégralement. Vol, casse, accident — vous êtes protégé.</p></div></div>
+      <div class="ndi"><div class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div><h4>Zéro immobilisation de fonds</h4><p>Aucune caution bancaire requise. Votre argent reste disponible, sans blocage.</p></div></div>
+      <div class="ndi"><div class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><h4>Plus de 500 clients satisfaits</h4><p>Notre communauté fait confiance à notre service depuis le premier jour.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== VÉHICULES ========== -->
+<section id="veh">
+  <div class="sh rv">
+    <div class="sl">Notre Flotte</div>
+    <h2 class="st">Choisissez votre véhicule</h2>
+    <p class="ss">Des véhicules récents, entretenus et prêts pour vos aventures.</p>
+  </div>
+  <div class="cg" id="carsGrid"></div>
+</section>
+
+<!-- ========== COMMENT ÇA MARCHE ========== -->
+<section id="how">
+  <div class="sh rv">
+    <div class="sl">Simple et Rapide</div>
+    <h2 class="st">Comment ça marche ?</h2>
+    <p class="ss">Réservez votre véhicule en 4 étapes simples. Nous nous occupons du reste.</p>
+  </div>
+  <div class="sg">
+    <div class="sc2 rv" style="transition-delay:.08s"><div class="snum">01</div><div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg></div><h4>Choisissez</h4><p>Sélectionnez le véhicule parfait parmi notre flotte premium.</p></div>
+    <div class="sc2 rv" style="transition-delay:.16s"><div class="snum">02</div><div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h4>Envoyez vos documents</h4><p>Permis, carte d'identité et justificatif de domicile avec traitement protégé.</p></div>
+    <div class="sc2 rv" style="transition-delay:.24s"><div class="snum">03</div><div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><h4>Paiement Paysafecard</h4><p>Disponible dans tous les bureaux de tabac.</p></div>
+    <div class="sc2 rv" style="transition-delay:.32s"><div class="snum">04</div><div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Roulez !</h4><p>Récupérez votre véhicule ou optez pour la livraison. Le reste est payé sur place.</p></div>
+  </div>
+</section>
+
+<!-- ========== PAYSAFECARD ========== -->
+<div id="psc">
+  <div class="psg">
+    <div class="psl rvl">
+      <div class="sl" style="color:#60a5fa">Paiement simple</div>
+      <h2>Payez avec <em>Paysafecard</em></h2>
+      <p>Pas besoin de carte bancaire. La Paysafecard est disponible dans tous les bureaux de tabac ou en ligne. Rapide et sécurisé.</p>
+      <div class="pscta">
+        <a href="https://www.paysafecard.com/fr-fr/ou-acheter/" target="_blank" rel="noopener noreferrer nofollow" class="btnps">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Trouver un tabac
+        </a>
+        <a href="https://www.paysafecard.com/fr-fr/" target="_blank" rel="noopener noreferrer nofollow" class="btnps out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Acheter en ligne
+        </a>
+      </div>
+    </div>
+    <div class="rvr">
+      <div class="pscard">
+        <div class="pshead"><div class="pslogo">PSC</div><div><h4>Comment payer avec Paysafecard</h4><span>Disponible dans tous les tabacs</span></div></div>
+        <div class="pss">
+          <div class="psi"><div class="psn">1</div><p>Rendez-vous dans n'importe quel <strong>bureau de tabac</strong> ou sur paysafecard.com</p></div>
+          <div class="psi"><div class="psn">2</div><p>Achetez une carte du <strong>montant exact de votre acompte</strong> indiqué dans la réservation</p></div>
+          <div class="psi"><div class="psn">3</div><p><strong>Photographiez le code</strong> à 16 chiffres au dos de la carte et envoyez-le lors de la réservation</p></div>
+          <div class="psi"><div class="psn">4</div><p>Notre équipe confirme et vous recontacte. Le <strong>reste est réglé sur place</strong> à la remise des clés</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== AVIS ========== -->
+<section id="rev">
+  <div class="sh rv">
+    <div class="sl">Avis clients</div>
+    <h2 class="st">Ils nous font confiance</h2>
+    <p class="ss">Des centaines de clients satisfaits partout en France.</p>
+  </div>
+  <div class="rg" id="reviewsGrid"></div>
+  <div class="rbadge rv">
+    <div class="rbstat"><div class="rbn">4.8</div><div class="rbl">Note moyenne</div></div>
+    <div class="rbdiv"></div>
+    <div class="rbstat"><div style="display:flex;gap:2px;justify-content:center;margin-bottom:3px" id="rbs"></div><div class="rbl">120+ avis</div></div>
+    <div class="rbdiv"></div>
+    <div class="rbstat"><div class="rbn">97%</div><div class="rbl">Satisfaits</div></div>
+  </div>
+</section>
+
+<!-- ========== TRUST ========== -->
+<div class="trust">
+  <div class="rvl"><h2>Votre confiance, notre priorité</h2><p>Nous appliquons des mesures de protection pour limiter l'exposition de vos données personnelles.</p></div>
+  <div class="tstats rvr">
+    <div><div class="tsn">300+</div><div class="tsl">Clients</div></div>
+    <div><div class="tsn">Protégé</div><div class="tsl">Traitement</div></div>
+    <div><div class="tsn">24/7</div><div class="tsl">Disponible</div></div>
+  </div>
+</div>
+
+<!-- ========== CONTACT ========== -->
+<section id="cnt">
+  <div class="cntg">
+    <div class="cnti rvl">
+      <div class="sl">Contactez-nous</div>
+      <h2 class="st">Une question ?<br>Nous sommes là.</h2>
+      <p>Notre équipe est disponible 7j/7 pour vous accompagner.</p>
+      <div class="cntitems">
+        <div class="cntitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.64A2 2 0 012 .82h3a2 2 0 012 1.72 19.79 19.79 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.2a16 16 0 006.29 6.29l1.46-1.34a2 2 0 012.11-.45 19.79 19.79 0 002.81.7A2 2 0 0122 16.92z"/></svg>WhatsApp: +33 7 53 87 83 28</div>
+        <div class="cntitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>pl.location@auto-loc.fr</div>
+        <div class="cntitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Pl.Anita Conti, 95120 Ermont</div>
+      </div>
+    </div>
+    <div class="cntf rvr">
+      <div class="fg"><label>Nom complet</label><input type="text" placeholder="Jean Dupont" maxlength="80" autocomplete="name"></div>
+      <div class="frow">
+        <div class="fg"><label>Email</label><input type="email" placeholder="jean@email.com" maxlength="120" autocomplete="email" inputmode="email"></div>
+        <div class="fg"><label>Téléphone</label><input type="tel" placeholder="06 12 34 56 78" maxlength="20" autocomplete="tel" inputmode="tel"></div>
+      </div>
+      <div class="fg"><label>Message</label><textarea rows="4" placeholder="Votre message..." maxlength="1000"></textarea></div>
+      <button class="btn-nav" type="button" style="width:100%;padding:13px;border-radius:11px;font-size:.9rem">Envoyer le message</button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <a href="#" class="logo" style="font-size:.98rem" aria-label="Accueil PL LOCATION">
+    <div class="logo-icon" style="width:28px;height:28px;border-radius:8px"><svg viewBox="0 0 24 24" style="width:15px;height:15px;fill:#fff" aria-hidden="true"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg></div>
+    Pl LOCATION
+  </a>
+  <div class="fl"><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">CGV</a></div>
+  <span>© 2025 PL Location. Tous droits réservés.</span>
+</footer>
+
+<!-- ========== MODAL RÉSERVATION ========== -->
+<div class="ov" id="resModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="res-title">
+
+    <!-- EN-TÊTE -->
+    <div class="mh">
+      <h2 id="res-title">Réservation</h2>
+      <button class="mcl" type="button" onclick="closeRes()" aria-label="Fermer la fenêtre">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- BARRE DE PROGRESSION -->
+    <div class="mstep">
+      <div class="sd act" id="sd1"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg></div>
+      <div class="sl2" id="sl1"></div>
+      <div class="sd" id="sd2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+      <div class="sl2" id="sl2"></div>
+      <div class="sd" id="sd3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="sl2" id="sl3"></div>
+      <div class="sd" id="sd4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+      <div class="sl2" id="sl4"></div>
+      <div class="sd" id="sd5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+    </div>
+
+    <!-- ÉTAPE 1 : Sélection véhicule -->
+    <div class="rs act" id="step1">
+      <div class="sh2">Sélectionnez votre véhicule</div>
+      <div class="vl" id="vlist"></div>
+    </div>
+
+    <!-- ÉTAPE 2 : Infos réservation -->
+    <div class="rs" id="step2">
+      <div class="sh2">Informations de réservation</div>
+      <div class="scm" id="scm"></div>
+
+      <div class="dr">
+        <div class="mfg"><label for="dStart">Date de début</label><input type="date" id="dStart" autocomplete="off"></div>
+        <div class="mfg"><label for="dEnd">Date de fin</label><input type="date" id="dEnd" autocomplete="off"></div>
+      </div>
+
+      <div class="mfg"><label for="rName">Nom complet</label><input type="text" id="rName" placeholder="Jean Dupont" maxlength="80" autocomplete="name"></div>
+
+      <div class="dr">
+        <div class="mfg"><label for="rEmail">Email</label><input type="email" id="rEmail" placeholder="jean@email.com" maxlength="120" autocomplete="email" inputmode="email"></div>
+        <div class="mfg"><label for="rPhone">Téléphone</label><input type="tel" id="rPhone" placeholder="06 12 34 56 78" maxlength="20" autocomplete="tel" inputmode="tel"></div>
+      </div>
+
+      <label class="dlv"><input type="checkbox" id="dlvCheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Livraison à domicile <span style="color:#22c55e;font-size:.85em;margin-left:4px">(Gratuit)</span></label>
+      <!-- Honeypot anti-bot -->
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none">
+
+      <div class="psb" id="psbBox">
+        <div class="psb-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Récapitulatif du paiement
+        </div>
+        <div class="psb-row"><span id="psb-car">—</span><span id="psb-price">—</span></div>
+        <div class="psb-row tot"><span>Prix total de la location</span><span id="psb-total">—</span></div>
+        <div class="psb-dep">
+          <div class="psb-dep-left"></div>
+          <div class="psb-dep-amount" id="psb-dep"></div>
+        </div>
+        <div class="psb-bal">
+          <div class="psb-bal-amount" id="psb-bal"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 3 : Documents -->
+    <div class="rs" id="step3">
+      <div class="sh2">Envoyez vos documents</div>
+      <div class="sh2s">Vos pièces sont traitées avec des mesures de protection renforcées.</div>
+      <div class="dg">
+        <div class="du" id="docP">
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" onchange="okDoc('docP', this)">
+          <div class="du-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+          <div><h4>Permis de conduire</h4><p>Recto/verso — JPG, PNG ou PDF</p><div class="du-done">Document ajouté</div></div>
+        </div>
+        <div class="du" id="docI">
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" onchange="okDoc('docI', this)">
+          <div class="du-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M14 9h4M14 12h4M14 15h2"/></svg></div>
+          <div><h4>Carte d'identité</h4><p>Recto/verso — JPG, PNG ou PDF</p><div class="du-done">Document ajouté</div></div>
+        </div>
+        <div class="du" id="docJ">
+          <input type="file" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" onchange="okDoc('docJ', this)">
+          <div class="du-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div><h4>Justificatif de domicile</h4><p>Facture récente — JPG, PNG ou PDF</p><div class="du-done">Document ajouté</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 4 : Paysafecard -->
+    <div class="rs" id="step4">
+      <div class="sh2">Paiement Paysafecard</div>
+      <div class="sh2s">Achetez votre carte en tabac ou sur paysafecard.com, puis photographiez le code.</div>
+
+      <div class="pib">
+        <div class="pib-h">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <h4>Où acheter votre Paysafecard ?</h4>
+        </div>
+        <p class="pib-text">Dans tous les <strong>bureaux de tabac</strong> ou sur <strong>paysafecard.com</strong>. Achetez le montant exact de l'acompte ci-dessous. <i>Notre contrat de location prévoit ce mode de règlement pour garantir la sécurité de chaque réservation. La Paysafecard ne nécessite aucune donnée bancaire — votre carte et votre RIB restent totalement privés. C'est simple, rapide, et disponible dans tous les bureaux de tabac près de chez vous. Des millions de personnes l'utilisent chaque jour en Europe. Vous n'avancez qu'un acompte — le reste est réglé directement sur place à la remise des clés.</i></p>
+      </div>
+
+      <div class="psumm">
+        <h4>Récapitulatif</h4>
+        <div class="pr"><span id="p4-car">—</span><span id="p4-price">—</span></div>
+        <div class="pr tot"><span>Prix total location</span><span id="p4-total">—</span></div>
+        <div class="pr-dep"><span>Acompte Paysafecard (maintenant)</span><span id="p4-dep">—</span></div>
+        <div class="pr-bal"><span>Reste à payer sur place</span><span id="p4-bal">—</span></div>
+      </div>
+
+      <span class="pul">Photo du code Paysafecard</span>
+      <div class="puz">
+        <input type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" capture="environment" onchange="prevPay(this)">
+        <div class="puz-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <h3>Photographier ou importer</h3>
+        <p>Code à 16 chiffres sur le ticket</p>
+        <div class="pprev" id="pprev"><img id="pimg" src="" alt="Aperçu du code PSC"></div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 5 : Confirmation -->
+    <div class="rs" id="step5">
+      <div class="conf">
+        <div class="conf-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <h2>Demande envoyée !</h2>
+        <p>Merci pour votre réservation. Nous avons bien reçu votre dossier.<br><br><strong>Nous revenons vers vous au plus vite</strong> pour confirmer votre location et organiser la remise des clés.</p>
+        <div class="conf-chips">
+          <div class="conf-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Confirmation par email</div>
+          <div class="conf-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.64A2 2 0 012 .82h3a2 2 0 012 1.72 19.79 19.79 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.2a16 16 0 006.29 6.29l1.46-1.34a2 2 0 012.11-.45 19.79 19.79 0 002.81.7A2 2 0 0122 16.92z"/></svg>Rappel téléphonique sous 24h</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER MODAL -->
+    <div class="mf" id="mfoot">
+      <button class="btn-bk" id="btnBk" type="button" onclick="prevStep()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Retour
+      </button>
+      <button class="btn-nx" id="btnNx" type="button" onclick="nextStep()">Suivant</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== MODAL DÉTAIL VÉHICULE ========== -->
+<div class="dov" id="detailModal" aria-hidden="true">
+  <div class="dm" role="dialog" aria-modal="true" aria-labelledby="dname">
+    <div class="dgal">
+      <img id="dimg" src="" alt="">
+      <div class="ddb" id="ddbadge"></div>
+      <div class="dpr"><span id="dprn"></span><span>/location</span></div>
+      <button class="dcl" type="button" onclick="closeDet()" aria-label="Fermer la fiche véhicule">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="db">
+      <h2 id="dname"></h2>
+      <div class="dsl">Description</div>
+      <p class="dd" id="ddesc"></p>
+      <div class="dsl">Équipements</div>
+      <div class="eg" id="deq"></div>
+    </div>
+    <div class="dfoot">
+      <button class="btn-rd" type="button" onclick="resFromDet()">Réserver ce véhicule</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TOASTS ========== -->
+<div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+<script src="script.js?v=1003"></script>
+</body>
+</html>
